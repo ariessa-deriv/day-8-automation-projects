@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.10 on linux)" generated="20220923 16:02:15.317" rpa="false" schemaversion="3">
+<suite id="s1" name="Account Closing" source="/home/nurulariessa/Desktop/day-8-automation-projects/automation_on_account_closing/account_closing.robot">
+<test id="s1-t1" name="Account Closing" line="100">
+<kw name="Login To Deriv">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>https://app.deriv.com</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20220923 16:02:15.458" level="INFO">Opening browser 'chrome' to base url 'https://app.deriv.com'.</msg>
+<status status="PASS" starttime="20220923 16:02:15.457" endtime="20220923 16:02:20.292"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20220923 16:02:20.292" endtime="20220923 16:02:20.400"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${purchase_call_button}</arg>
+<arg>200</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:20.401" endtime="20220923 16:02:23.273"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${login_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:23.273" level="INFO">Clicking element '//button[@id='dt_login_button']'.</msg>
+<status status="PASS" starttime="20220923 16:02:23.273" endtime="20220923 16:02:25.727"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${email_field}</arg>
+<arg>200</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:25.728" endtime="20220923 16:02:25.745"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${email_field}</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:25.746" level="INFO">Typing text 'ariessa+98@besquare.com.my' into text field '//input[@id='txtEmail']'.</msg>
+<status status="PASS" starttime="20220923 16:02:25.745" endtime="20220923 16:02:25.832"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${password_field}</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:25.833" level="INFO">Typing text 'Passw0rd' into text field '//input[@id='txtPass']'.</msg>
+<status status="PASS" starttime="20220923 16:02:25.833" endtime="20220923 16:02:25.914"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${login_form_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:25.914" level="INFO">Clicking element '//button[@type='submit']'.</msg>
+<status status="PASS" starttime="20220923 16:02:25.914" endtime="20220923 16:02:29.257"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${purchase_call_button}</arg>
+<arg>200</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:29.258" endtime="20220923 16:02:33.626"/>
+</kw>
+<status status="PASS" starttime="20220923 16:02:15.457" endtime="20220923 16:02:33.626"/>
+</kw>
+<kw name="Check the Current Account Lands on Real Account">
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${notification_count}</var>
+<arg>//button[@class='notification__close-button']</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20220923 16:02:33.644" level="INFO">${notification_count} = 0</msg>
+<status status="PASS" starttime="20220923 16:02:33.628" endtime="20220923 16:02:33.644"/>
+</kw>
+<if>
+<branch type="IF" condition="${notification_count} &gt; 0">
+<for flavor="IN RANGE">
+<var>${index}</var>
+<value>1</value>
+<value>${notification_count}</value>
+<iter>
+<var name="${index}"/>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[@class='notification__close-button']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20220923 16:02:33.645" endtime="20220923 16:02:33.645"/>
+</kw>
+<status status="NOT RUN" starttime="20220923 16:02:33.645" endtime="20220923 16:02:33.645"/>
+</iter>
+<status status="NOT RUN" starttime="20220923 16:02:33.644" endtime="20220923 16:02:33.645"/>
+</for>
+<status status="NOT RUN" starttime="20220923 16:02:33.644" endtime="20220923 16:02:33.645"/>
+</branch>
+<status status="PASS" starttime="20220923 16:02:33.644" endtime="20220923 16:02:33.645"/>
+</if>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${account_info}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:33.646" level="INFO">Clicking element '//div[@id='dt_core_account-info_acc-info']'.</msg>
+<status status="PASS" starttime="20220923 16:02:33.645" endtime="20220923 16:02:33.731"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>${real_tab}</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20220923 16:02:34.335" level="INFO">Current page contains element '//li[@id='real_account_tab']'.</msg>
+<status status="PASS" starttime="20220923 16:02:33.732" endtime="20220923 16:02:34.335"/>
+</kw>
+<status status="PASS" starttime="20220923 16:02:33.627" endtime="20220923 16:02:34.336"/>
+</kw>
+<kw name="Switch to Virtual Account and Verify Virtual Account is Displayed">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${demo_tab}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:34.337" level="INFO">Clicking element '//li[@id='dt_core_account-switcher_demo-tab']'.</msg>
+<status status="PASS" starttime="20220923 16:02:34.336" endtime="20220923 16:02:34.751"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>//*[contains(text(),'Demo') and .//div[contains(@class, 'acc-switcher__loginid-text')]]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20220923 16:02:34.785" level="INFO">Current page contains element '//*[contains(text(),'Demo') and .//div[contains(@class, 'acc-switcher__loginid-text')]]'.</msg>
+<status status="PASS" starttime="20220923 16:02:34.751" endtime="20220923 16:02:34.785"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//div[contains(@class, 'acc-switcher__accounts')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:34.786" level="INFO">Clicking element '//div[contains(@class, 'acc-switcher__accounts')]'.</msg>
+<status status="PASS" starttime="20220923 16:02:34.785" endtime="20220923 16:02:34.893"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//span[contains(@class, 'trade-container__price-info-currency')]</arg>
+<arg>200</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:34.894" endtime="20220923 16:02:34.986"/>
+</kw>
+<status status="PASS" starttime="20220923 16:02:34.336" endtime="20220923 16:02:34.987"/>
+</kw>
+<kw name="Close Account Without Selecting Any Reason">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${account_settings_icon}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:34.991" level="INFO">Clicking element '//a[@class='account-settings-toggle']'.</msg>
+<status status="PASS" starttime="20220923 16:02:34.989" endtime="20220923 16:02:35.277"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//label[@for='residence']</arg>
+<arg>200</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:35.278" endtime="20220923 16:02:37.794"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//a[@id='dc_close-your-account_link']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:37.795" level="INFO">Clicking element '//a[@id='dc_close-your-account_link']'.</msg>
+<status status="PASS" starttime="20220923 16:02:37.794" endtime="20220923 16:02:37.974"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//button[@class='dc-btn dc-btn--primary dc-btn__large closing-account__button--close-account']</arg>
+<arg>50</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:37.974" endtime="20220923 16:02:37.990"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[@class='dc-btn dc-btn--primary dc-btn__large closing-account__button--close-account']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:37.991" level="INFO">Clicking element '//button[@class='dc-btn dc-btn--primary dc-btn__large closing-account__button--close-account']'.</msg>
+<status status="PASS" starttime="20220923 16:02:37.991" endtime="20220923 16:02:38.080"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//p[@class='dc-text closing-account-reasons__title']</arg>
+<arg>50</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:38.081" endtime="20220923 16:02:38.095"/>
+</kw>
+<kw name="Element Should Be Disabled" library="SeleniumLibrary">
+<arg>//button[@type='submit' and .//span[contains(text(), 'Continue')]]</arg>
+<doc>Verifies that element identified by ``locator`` is disabled.</doc>
+<status status="PASS" starttime="20220923 16:02:38.096" endtime="20220923 16:02:38.122"/>
+</kw>
+<status status="PASS" starttime="20220923 16:02:34.988" endtime="20220923 16:02:38.122"/>
+</kw>
+<kw name="Cancel Account Closing">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${account_settings_icon}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:38.124" level="INFO">Clicking element '//a[@class='account-settings-toggle']'.</msg>
+<status status="PASS" starttime="20220923 16:02:38.123" endtime="20220923 16:02:38.274"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//label[@for='residence']</arg>
+<arg>200</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:38.274" endtime="20220923 16:02:39.159"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//a[@id='dc_close-your-account_link']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:39.159" level="INFO">Clicking element '//a[@id='dc_close-your-account_link']'.</msg>
+<status status="PASS" starttime="20220923 16:02:39.159" endtime="20220923 16:02:39.265"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//button[@class='dc-btn dc-btn--secondary dc-btn__large closing-account__button--cancel']</arg>
+<arg>50</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:39.265" endtime="20220923 16:02:39.284"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[@class='dc-btn dc-btn--secondary dc-btn__large closing-account__button--cancel']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:39.285" level="INFO">Clicking element '//button[@class='dc-btn dc-btn--secondary dc-btn__large closing-account__button--cancel']'.</msg>
+<status status="PASS" starttime="20220923 16:02:39.284" endtime="20220923 16:02:39.568"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//span[contains(@class, 'trade-container__price-info-currency')]</arg>
+<arg>200</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:39.569" endtime="20220923 16:02:42.403"/>
+</kw>
+<status status="PASS" starttime="20220923 16:02:38.123" endtime="20220923 16:02:42.405"/>
+</kw>
+<kw name="Check Response After Clicking Back Button in Reasons to Close Account Page">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${account_settings_icon}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:42.409" level="INFO">Clicking element '//a[@class='account-settings-toggle']'.</msg>
+<status status="PASS" starttime="20220923 16:02:42.407" endtime="20220923 16:02:42.741"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//label[@for='residence']</arg>
+<arg>200</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:42.742" endtime="20220923 16:02:43.391"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//a[@id='dc_close-your-account_link']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:43.391" level="INFO">Clicking element '//a[@id='dc_close-your-account_link']'.</msg>
+<status status="PASS" starttime="20220923 16:02:43.391" endtime="20220923 16:02:43.520"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//button[@class='dc-btn dc-btn--primary dc-btn__large closing-account__button--close-account']</arg>
+<arg>50</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:43.520" endtime="20220923 16:02:43.533"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[@class='dc-btn dc-btn--primary dc-btn__large closing-account__button--close-account']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:43.534" level="INFO">Clicking element '//button[@class='dc-btn dc-btn--primary dc-btn__large closing-account__button--close-account']'.</msg>
+<status status="PASS" starttime="20220923 16:02:43.533" endtime="20220923 16:02:43.628"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//button[@type='button' and .//span[contains(text(), 'Back')]]</arg>
+<arg>50</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:43.628" endtime="20220923 16:02:43.644"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[@type='button' and .//span[contains(text(), 'Back')]]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:43.645" level="INFO">Clicking element '//button[@type='button' and .//span[contains(text(), 'Back')]]'.</msg>
+<status status="PASS" starttime="20220923 16:02:43.644" endtime="20220923 16:02:43.801"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//button[@class='dc-btn dc-btn--primary dc-btn__large closing-account__button--close-account']</arg>
+<arg>50</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:43.802" endtime="20220923 16:02:43.815"/>
+</kw>
+<status status="PASS" starttime="20220923 16:02:42.406" endtime="20220923 16:02:43.815"/>
+</kw>
+<kw name="Check Security and Privacy Policy Link Points to the Correct PDF File">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${account_settings_icon}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:43.817" level="INFO">Clicking element '//a[@class='account-settings-toggle']'.</msg>
+<status status="PASS" starttime="20220923 16:02:43.816" endtime="20220923 16:02:43.951"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//label[@for='residence']</arg>
+<arg>200</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:43.952" endtime="20220923 16:02:44.381"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//a[@id='dc_close-your-account_link']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:44.382" level="INFO">Clicking element '//a[@id='dc_close-your-account_link']'.</msg>
+<status status="PASS" starttime="20220923 16:02:44.381" endtime="20220923 16:02:44.465"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//button[@class='dc-btn dc-btn--primary dc-btn__large closing-account__button--close-account']</arg>
+<arg>50</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:44.465" endtime="20220923 16:02:44.490"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>//a[@href='https://deriv.com/tnc/security-and-privacy.pdf' and contains(text(), 'Security and privacy policy')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20220923 16:02:44.507" level="INFO">Current page contains element '//a[@href='https://deriv.com/tnc/security-and-privacy.pdf' and contains(text(), 'Security and privacy policy')]'.</msg>
+<status status="PASS" starttime="20220923 16:02:44.491" endtime="20220923 16:02:44.507"/>
+</kw>
+<status status="PASS" starttime="20220923 16:02:43.816" endtime="20220923 16:02:44.507"/>
+</kw>
+<kw name="Close Account With Multiple Reasons">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${account_settings_icon}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:44.510" level="INFO">Clicking element '//a[@class='account-settings-toggle']'.</msg>
+<status status="PASS" starttime="20220923 16:02:44.508" endtime="20220923 16:02:44.651"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//label[@for='residence']</arg>
+<arg>200</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:44.652" endtime="20220923 16:02:45.230"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//a[@id='dc_close-your-account_link']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:45.231" level="INFO">Clicking element '//a[@id='dc_close-your-account_link']'.</msg>
+<status status="PASS" starttime="20220923 16:02:45.230" endtime="20220923 16:02:45.348"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//button[@class='dc-btn dc-btn--primary dc-btn__large closing-account__button--close-account']</arg>
+<arg>50</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:45.348" endtime="20220923 16:02:45.376"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[@class='dc-btn dc-btn--primary dc-btn__large closing-account__button--close-account']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:45.376" level="INFO">Clicking element '//button[@class='dc-btn dc-btn--primary dc-btn__large closing-account__button--close-account']'.</msg>
+<status status="PASS" starttime="20220923 16:02:45.376" endtime="20220923 16:02:45.458"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//p[@class='dc-text closing-account-reasons__title']</arg>
+<arg>50</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:45.458" endtime="20220923 16:02:45.467"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>(//span[@class='dc-text dc-checkbox__label'])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:45.468" level="INFO">Clicking element '(//span[@class='dc-text dc-checkbox__label'])[1]'.</msg>
+<status status="PASS" starttime="20220923 16:02:45.468" endtime="20220923 16:02:45.574"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>(//span[@class='dc-text dc-checkbox__label'])[2]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:45.575" level="INFO">Clicking element '(//span[@class='dc-text dc-checkbox__label'])[2]'.</msg>
+<status status="PASS" starttime="20220923 16:02:45.574" endtime="20220923 16:02:45.701"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>(//span[@class='dc-text dc-checkbox__label'])[3]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:45.701" level="INFO">Clicking element '(//span[@class='dc-text dc-checkbox__label'])[3]'.</msg>
+<status status="PASS" starttime="20220923 16:02:45.701" endtime="20220923 16:02:45.793"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[@type='submit' and .//span[contains(text(), 'Continue')]]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:45.794" level="INFO">Clicking element '//button[@type='submit' and .//span[contains(text(), 'Continue')]]'.</msg>
+<status status="PASS" starttime="20220923 16:02:45.794" endtime="20220923 16:02:45.973"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//button[@type='submit' and .//span[contains(text(), 'Close account')]]</arg>
+<arg>50</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:45.974" endtime="20220923 16:02:45.992"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[@type='submit' and .//span[contains(text(), 'Close account')]]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220923 16:02:45.993" level="INFO">Clicking element '//button[@type='submit' and .//span[contains(text(), 'Close account')]]'.</msg>
+<status status="PASS" starttime="20220923 16:02:45.992" endtime="20220923 16:02:46.221"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//p[@class="dc-text account-closed"]</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220923 16:02:46.222" endtime="20220923 16:02:47.128"/>
+</kw>
+<status status="PASS" starttime="20220923 16:02:44.508" endtime="20220923 16:02:47.128"/>
+</kw>
+<status status="PASS" starttime="20220923 16:02:15.456" endtime="20220923 16:02:47.128"/>
+</test>
+<status status="PASS" starttime="20220923 16:02:15.318" endtime="20220923 16:02:47.129"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Account Closing">Account Closing</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
